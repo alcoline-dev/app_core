@@ -116,17 +116,17 @@ class UserApi
     /**
      * Отримання інформації по користовачу
      *
-     * @param string $accessToken Токен входу
+     * @param string|null $accessToken Токен входу
      * @return UserMeInfoView повертає обʼєкт інфо
      * @throws RpcInvalidTokenException
      */
     public function me(
-        #[RPC\Assertions([new Assert\NotBlank, new Assert\Uuid])]
-        string $accessToken
+        #[RPC\Assertions([new Assert\Optional(), new Assert\Uuid])]
+        ?string $accessToken = null
     ): UserMeInfoView
     {
         try {
-            $user = $this->userContext->getUser() ?? $this->userSdkService->me($accessToken);
+            $user = $this->userContext->getUser() ?? $this->userSdkService->me($accessToken ?? '');
         } catch (\Throwable $e) {
             throw new RpcInvalidTokenException($e->getMessage(), previous: $e);
         }

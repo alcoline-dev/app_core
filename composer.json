@@ -1,7 +1,7 @@
 {
     "name": "alcoline-software/app-core",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minimum-stabilyty": "stable",
     "license": "MIT",
     "authors": [
